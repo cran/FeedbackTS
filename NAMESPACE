@@ -1,0 +1,16 @@
+exportPattern("^[[:alpha:]]+")
+exportMethods(
+    "[",
+    "[<-",
+    "show",
+    "summary"
+)
+exportClasses(
+    "KDD",
+    "KDD.yearly.average"
+)
+import("methods")
+import("maps")
+import("mapdata")
+import("proj4")
+import("geoR")
