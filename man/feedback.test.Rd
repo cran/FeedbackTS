@@ -18,7 +18,7 @@ either a \link{KDD object} or a \link{KDD.yearly.average object}.
 a character string specifying the type of test, must be one of \code{"feedback"} or \code{"change.in.feedback"}.
 }
   \item{operator}{
-a character string specifying the transformation of the raw values, must be one of \code{"dmv"} or \code{"dmpiv"}.
+a character string specifying the transformation of the raw values, must be one of \code{"dmv"} or \code{"dmpiv"} (see section Details in \link{after.minus.before}).
 }
   \item{nb.rand}{
 a positive integer specifying the number of randomizations.
@@ -37,7 +37,7 @@ an optional numeric value specifying a temporal turning point in the data series
 	a numeric value providing the p-value of the test.
 }
 \references{
-Soubeyrand, S., Morris, C. E. and Bigg, E. K. (2013). Analysis of fragmented time directionality in time series to elucidate feedbacks in climate data. Research Report.
+Soubeyrand, S., Morris, C. E. and Bigg, E. K. (in press). Analysis of fragmented time directionality in time series to elucidate feedbacks in climate data. Environmental Modelling and Software.
 }
 \author{
 	Samuel Soubeyrand \email{Samuel.Soubeyrand@avignon.inra.fr}, Cindy E. Morris, E. Keith Bigg.
@@ -59,8 +59,7 @@ KDD=kdd.from.raw.data(raw.data=rain.site.6008, keyday.threshold=25, nb.days=20,
 ## using the thresholded data series
 ## using difference of means of positive indicator values (i.e. rainfall occurrence)
 par(mfrow=c(1,2), mar=c(5.1,4.1,4.1,2.1))
-#uncomment:
-#feedback.test(object=KDD, test="feedback", operator="dmpiv", nb.rand=10^3, plots=TRUE)
+\donttest{feedback.test(object=KDD, test="feedback", operator="dmpiv", nb.rand=10^3, plots=TRUE)}
 }
 \keyword{ misc }
 

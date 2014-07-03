@@ -22,10 +22,10 @@ Rainfall data at Callagiddy station in Western Australia
 }
 
 \source{
-Soubeyrand, S., Morris, C. E. and Bigg, E. K. (2013). Analysis of fragmented time directionality in time series to elucidate feedbacks in climate data. Research Report.
+Soubeyrand, S., Morris, C. E. and Bigg, E. K. (in press). Analysis of fragmented time directionality in time series to elucidate feedbacks in climate data. Environmental Modelling and Software.
 }
 \references{
-Soubeyrand, S., Morris, C. E. and Bigg, E. K. (2013). Analysis of fragmented time directionality in time series to elucidate feedbacks in climate data. Research Report.
+Soubeyrand, S., Morris, C. E. and Bigg, E. K. (in press). Analysis of fragmented time directionality in time series to elucidate feedbacks in climate data. Environmental Modelling and Software.
 }
 \examples{
 #### load data for site 6008 (Callagiddy station)

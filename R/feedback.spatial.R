@@ -131,7 +131,7 @@ krige=function(coordinates,statistic,variog.param,grid,krige.param,plots=TRUE){
 		map('worldHires', grid$border,xlim=range(grid$x),ylim=range(grid$y),col=1,add=TRUE)	
 		image(kc,val=sqrt(kc$krige.var),loc=gr,col=gray(seq(1,0.1,l=100)),
         xlab="latitude",ylab="longitude",main="kriging standard error")
-		contour(kc,loc=gr,add=TRUE)
+		contour(kc,val=sqrt(kc$krige.var),loc=gr,add=TRUE)
 		map('worldHires', grid$border,xlim=range(grid$x),ylim=range(grid$y),col=1,add=TRUE)	
 	}
   	list(input=input,in.region=in.region,variofit.wls=wls.n,MAP=MAP,grid=gr,

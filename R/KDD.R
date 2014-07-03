@@ -71,7 +71,11 @@ kdd.from.raw.data <- function(raw.data,keyday.threshold,nb.days,col.series,col.d
 		}
 		if(na.rm){
 			no.NA=apply(before.after,2,function(r) sum(is.na(r))==0)
-			before.after=cbind(before.after[,no.NA])
+			if(nrow(before.after)==1){
+				before.after=rbind(before.after[,no.NA])
+			} else {
+				before.after=cbind(before.after[,no.NA])
+			}
 			keyday=keyday[no.NA]
 		}
 		if(length(filter)>0){

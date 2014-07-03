@@ -35,7 +35,7 @@ Objects can be created by calls of the form \code{new("KDD.yearly.average", ...)
 	 }
 }
 \references{
-Soubeyrand, S., Morris, C. E. and Bigg, E. K. (2013). Analysis of fragmented time directionality in time series to elucidate feedbacks in climate data. Research Report.
+Soubeyrand, S., Morris, C. E. and Bigg, E. K. (in press). Analysis of fragmented time directionality in time series to elucidate feedbacks in climate data. Environmental Modelling and Software.
 }
 \author{
 Samuel Soubeyrand \email{Samuel.Soubeyrand@avignon.inra.fr}, Cindy E. Morris, E. Keith Bigg.
