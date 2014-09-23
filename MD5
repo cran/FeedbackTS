@@ -1,5 +1,5 @@
-9381acaa4b3480805440c38fe89d6de8 *DESCRIPTION
-5a0a1fd94ba097cef0d913117682b02a *NAMESPACE
+593151da9f448b77e43f7ea0dee9c077 *DESCRIPTION
+62c33aeaf1e9ef26254194dc711451f6 *NAMESPACE
 b550283407cf03cc4ea1c0bbe07e1900 *R/KDD.R
 f097f1cbbfc1d83bcebf0c84cf1f626f *R/KDD.yearly.average.R
 0b390de073c4b074ca7cf46b4e2a6664 *R/KT.output.R
@@ -7,10 +7,10 @@ d913a8ebc9651a932a16911a9461b8e0 *R/feedback.R
 0f18d3e9d937ca86e3dcfb45dacd2812 *R/feedback.spatial.R
 95a78f3efa641e59537006df680f5c3e *data/rain.feedback.stats.RData
 e396fd4b1e61bae2d78509b4f8d33604 *data/rain.site.6008.RData
-bf603d43c2d09f3dfb12a3e6bd6fff0d *man/FeedbackTS-package.Rd
-da35be71baf41de0d8556488986c7269 *man/KDD-class.Rd
-5c81d0f5287ee18cbf0f722d6865e018 *man/KDD.yearly.average-class.Rd
-67455b6da5ddff9576ca8a7665a7aaad *man/KT.output-class.Rd
+745287893fe4e95f98f067d6291f3a77 *man/FeedbackTS-package.Rd
+8d31ba61082d73fbc95ec26e6f78b14f *man/KDD-class.Rd
+c8a52e82e2a22acebfa28c1fd9b4dff7 *man/KDD.yearly.average-class.Rd
+de307423d66943c2b0eb98da6e7c168e *man/KT.output-class.Rd
 c17c87093332accb323c0e28d0846051 *man/after.minus.before.Rd
 b693f76b6aa1b2ca24238132e883dc52 *man/feedback.stats.Rd
 ca2d88f692181f7d31f53d7b771f3a5c *man/feedback.test.Rd

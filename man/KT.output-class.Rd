@@ -6,8 +6,8 @@
 \alias{KT.output class}
 \alias{KT.output-object}
 \alias{KT.output object}
-\alias{[,KT.output-method}
-\alias{[<-,KT.output-method}
+\alias{[<-,KT.output,ANY,ANY,ANY-method}
+\alias{[,KT.output,ANY,ANY,ANY-method}
 \alias{show,KT.output-method}
 \alias{summary,KT.output-method}
 \alias{names,KT.output-method}
@@ -32,11 +32,11 @@ Objects are created by calls of the \link{krige.test} function.
 }
 \section{Methods}{
   \describe{
-    \item{[}{\code{signature(x = "KT.output")}}
-    \item{[<-}{\code{signature(x = "KT.output")}}
+    \item{[<-}{\code{signature(x = "KT.output", i = "ANY", j = "ANY", value = "ANY")}}
+    \item{[}{\code{signature(x = "KT.output", i = "ANY", j = "ANY", drop = "ANY")}}
+    \item{names}{\code{signature(x = "KT.output")}}
     \item{show}{\code{signature(object = "KT.output")}}
     \item{summary}{\code{signature(object = "KT.output")}}
-    \item{names}{\code{signature(object = "KT.output")}}
     \item{plot}{\code{signature(object = "KT.output")}}
 	 }
 }

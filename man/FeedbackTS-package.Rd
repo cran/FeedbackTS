@@ -12,8 +12,8 @@ Analysis of fragmented time directionality to investigate feedbacks in time seri
 \tabular{ll}{
 Package: \tab FeedbackTS\cr
 Type: \tab Package\cr
-Version: \tab 1.1\cr
-Date: \tab 2014-07-03\cr
+Version: \tab 1.2\cr
+Date: \tab 2014-09-23\cr
 License: \tab GPL (>=2.0)\cr
 Depends: \tab methods, maps, mapdata, proj4, geoR\cr
 }

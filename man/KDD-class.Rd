@@ -1,13 +1,13 @@
 \name{KDD-class}
-\Rdversion{1.1}
+\Rdversion{1.2}
 \docType{class}
 \alias{KDD-class}
 \alias{KDD}
 \alias{KDD object}
 \alias{KDD-object}
 \alias{KDD class}
-\alias{[,KDD-method}
-\alias{[<-,KDD-method}
+\alias{[<-,KDD,ANY,ANY,ANY-method}
+\alias{[,KDD,ANY,ANY,ANY-method}
 \alias{show,KDD-method}
 \alias{summary,KDD-method}
 \alias{names,KDD-method}
@@ -29,13 +29,17 @@ Objects can be created by calls of the form \code{new("KDD", ...)}, \link{kdd.fr
     \item{\code{keyday.threshold}:}{Object of class \code{"numeric"} providing the threshold value above which a day is considered as a key day (i.e. if \eqn{y_i\ge } \code{keyday.threshold}, then day \eqn{i} is a key day).}
   }
 }
+
+
 \section{Methods}{
   \describe{
-    \item{[}{\code{signature(x = "KDD")} }
-    \item{[<-}{\code{signature(x = "KDD")} }
-    \item{show}{\code{signature(object = "KDD")} }
-    \item{summary}{\code{signature(object = "KDD")} }
-    \item{names}{\code{signature(object = "KDD")} }
+    \item{[<-}{\code{signature(object = "KDD", i = "ANY", j = "ANY", value = "ANY")} }
+    \item{[}{\code{signature(x = "KDD", i = "ANY", j = "ANY", drop = "ANY")} }
+    \item{show}{\code{signature(object = "KDD")}: Prints all slots of
+  the KDD object.}
+    \item{summary}{\code{signature(object = "KDD")}: Prints summary
+  characteristics of the KDD object.}
+    \item{names}{\code{signature(x = "KDD")}: Prints slot names.}
 	 }
 }
 \references{

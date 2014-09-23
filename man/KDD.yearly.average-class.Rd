@@ -6,7 +6,7 @@
 \alias{KDD.yearly.average class}
 \alias{KDD.yearly.average object}
 \alias{KDD.yearly.average-object}
-\alias{[,KDD.yearly.average-method}
+\alias{[,KDD.yearly.average,ANY,ANY,ANY-method}
 \alias{show,KDD.yearly.average-method}
 \alias{summary,KDD.yearly.average-method}
 \alias{names,KDD.yearly.average-method}
@@ -28,10 +28,10 @@ Objects can be created by calls of the form \code{new("KDD.yearly.average", ...)
 }
 \section{Methods}{
   \describe{
-    \item{[}{\code{signature(x = "KDD.yearly.average")} }
+    \item{[}{\code{signature(x = "KDD.yearly.average", i = "ANY", j = "ANY", drop = "ANY")} }
+    \item{names}{\code{signature(x = "KDD.yearly.average")} }
     \item{show}{\code{signature(object = "KDD.yearly.average")} }
     \item{summary}{\code{signature(object = "KDD.yearly.average")} }
-    \item{names}{\code{signature(object = "KDD.yearly.average")} }
 	 }
 }
 \references{
