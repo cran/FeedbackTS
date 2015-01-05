@@ -60,7 +60,7 @@ If \code{turning.year} is a numeric vector, a numeric vector providing:
 }
 }
 \references{
-Soubeyrand, S., Morris, C. E. and Bigg, E. K. (in press). Analysis of fragmented time directionality in time series to elucidate feedbacks in climate data. Environmental Modelling and Software.
+Soubeyrand, S., Morris, C. E. and Bigg, E. K. (2014). Analysis of fragmented time directionality in time series to elucidate feedbacks in climate data. Environmental Modelling and Software 61: 78-86.
 }
 \author{
 	Samuel Soubeyrand \email{Samuel.Soubeyrand@avignon.inra.fr}, Cindy E. Morris, E. Keith Bigg.

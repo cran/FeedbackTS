@@ -26,10 +26,10 @@
 The statistics in this data set were computed using the \link{feedback.stats} function.
 }
 \source{
-Soubeyrand, S., Morris, C. E. and Bigg, E. K. (in press). Analysis of fragmented time directionality in time series to elucidate feedbacks in climate data. Environmental Modelling and Software.
+Soubeyrand, S., Morris, C. E. and Bigg, E. K. (2014). Analysis of fragmented time directionality in time series to elucidate feedbacks in climate data. Environmental Modelling and Software 61: 78-86.
 }
 \references{
-Soubeyrand, S., Morris, C. E. and Bigg, E. K. (in press). Analysis of fragmented time directionality in time series to elucidate feedbacks in climate data. Environmental Modelling and Software.
+Soubeyrand, S., Morris, C. E. and Bigg, E. K. (2014). Analysis of fragmented time directionality in time series to elucidate feedbacks in climate data. Environmental Modelling and Software 61: 78-86.
 }
 \examples{
 #### load data of feedback and change-in-feedback indices in 88 sites across Australia

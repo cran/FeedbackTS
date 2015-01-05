@@ -37,7 +37,7 @@ an optional numeric value specifying a temporal turning point in the data series
 	a numeric value providing the p-value of the test.
 }
 \references{
-Soubeyrand, S., Morris, C. E. and Bigg, E. K. (in press). Analysis of fragmented time directionality in time series to elucidate feedbacks in climate data. Environmental Modelling and Software.
+Soubeyrand, S., Morris, C. E. and Bigg, E. K. (2014). Analysis of fragmented time directionality in time series to elucidate feedbacks in climate data. Environmental Modelling and Software 61: 78-86.
 }
 \author{
 	Samuel Soubeyrand \email{Samuel.Soubeyrand@avignon.inra.fr}, Cindy E. Morris, E. Keith Bigg.
@@ -58,6 +58,7 @@ KDD=kdd.from.raw.data(raw.data=rain.site.6008, keyday.threshold=25, nb.days=20,
 #### test feedback and change in feedback with a single data series
 ## using the thresholded data series
 ## using difference of means of positive indicator values (i.e. rainfall occurrence)
+## computer intensive stage
 par(mfrow=c(1,2), mar=c(5.1,4.1,4.1,2.1))
 \donttest{feedback.test(object=KDD, test="feedback", operator="dmpiv", nb.rand=10^3, plots=TRUE)}
 }

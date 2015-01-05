@@ -52,7 +52,7 @@ Let \eqn{i} denote a key day. Let \eqn{z_i} denote the value, at day \eqn{i}, of
 an object from the \link{KDD class}.
 }
 \references{
-Soubeyrand, S., Morris, C. E. and Bigg, E. K. (in press). Analysis of fragmented time directionality in time series to elucidate feedbacks in climate data. Environmental Modelling and Software.
+Soubeyrand, S., Morris, C. E. and Bigg, E. K. (2014). Analysis of fragmented time directionality in time series to elucidate feedbacks in climate data. Environmental Modelling and Software 61: 78-86.
 }
 \author{
 Samuel Soubeyrand \email{Samuel.Soubeyrand@avignon.inra.fr}, Cindy E. Morris, E. Keith Bigg.
@@ -78,8 +78,7 @@ summary(KDD)
 rain.site.6008b=cbind(rain.site.6008,rain.site.6008[["Year"]]>=1960)
 KDD2=kdd.from.raw.data(raw.data=rain.site.6008b,keyday.threshold=25,nb.days=20,
    col.series=5,col.date=c(2,3,4),na.rm=TRUE,
-   filter=list(list(apply.over="range",column=6,value="Y"),
-      list(apply.over="keyday",column=10,value=TRUE)))
+   filter=list(list(apply.over="range",column=6,value=TRUE)))
 summary(KDD2)
 }
 \keyword{misc}
