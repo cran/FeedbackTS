@@ -3,11 +3,13 @@ exportMethods(
     "[",
     "[<-",
     "show",
-    "summary"
+    "summary",
+    "names"
 )
 exportClasses(
     "KDD",
-    "KDD.yearly.average"
+    "KDD.yearly.average",
+    "KT.output"
 )
 import("methods")
 import("maps")

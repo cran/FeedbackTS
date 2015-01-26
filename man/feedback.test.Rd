@@ -34,7 +34,7 @@ an optional numeric value specifying a temporal turning point in the data series
 	If \code{plots = TRUE}, two plots are produced. The first plot gives the cumulative after-before difference (CABD; red curve) and for each CABD value the quantiles of order 0.025 (bottom dotted curve), 0.25 (bottom dashed curve), 0.5 (solid black curve), 0.75 (top dashed curve) and 0.975 (top dotted curve) under the null hypothesis that is tested (either no feedback or no change-in-feedback). The second plot gives the number of exits of the CABD function from the confidence intervals (red line) and the distribution of the number of exits under the null hypothesis that is tested (histogram).
 }
 \value{
-	a numeric value providing the p-value of the test.
+	A numeric value providing the p-value of the test.
 }
 \references{
 Soubeyrand, S., Morris, C. E. and Bigg, E. K. (2014). Analysis of fragmented time directionality in time series to elucidate feedbacks in climate data. Environmental Modelling and Software 61: 78-86.
@@ -58,9 +58,8 @@ KDD=kdd.from.raw.data(raw.data=rain.site.6008, keyday.threshold=25, nb.days=20,
 #### test feedback and change in feedback with a single data series
 ## using the thresholded data series
 ## using difference of means of positive indicator values (i.e. rainfall occurrence)
-## computer intensive stage
 par(mfrow=c(1,2), mar=c(5.1,4.1,4.1,2.1))
-\donttest{feedback.test(object=KDD, test="feedback", operator="dmpiv", nb.rand=10^3, plots=TRUE)}
+feedback.test(object=KDD, test="feedback", operator="dmpiv", nb.rand=10^3, plots=TRUE)
 }
 \keyword{ misc }
 

@@ -6,8 +6,10 @@
 \alias{KT.output class}
 \alias{KT.output-object}
 \alias{KT.output object}
-\alias{[<-,KT.output,ANY,ANY,ANY-method}
-\alias{[,KT.output,ANY,ANY,ANY-method}
+%\alias{[<-,KT.output,ANY,ANY,ANY-method}
+%\alias{[,KT.output,ANY,ANY,ANY-method}
+\alias{[<-,KT.output-method}
+\alias{[,KT.output-method}
 \alias{show,KT.output-method}
 \alias{summary,KT.output-method}
 \alias{names,KT.output-method}
@@ -32,12 +34,16 @@ Objects are created by calls of the \link{krige.test} function.
 }
 \section{Methods}{
   \describe{
-    \item{[<-}{\code{signature(x = "KT.output", i = "ANY", j = "ANY", value = "ANY")}}
-    \item{[}{\code{signature(x = "KT.output", i = "ANY", j = "ANY", drop = "ANY")}}
-    \item{names}{\code{signature(x = "KT.output")}}
-    \item{show}{\code{signature(object = "KT.output")}}
-    \item{summary}{\code{signature(object = "KT.output")}}
-    \item{plot}{\code{signature(object = "KT.output")}}
+    %\item{[<-}{\code{signature(x = "KT.output", i = "ANY", j = "ANY", value = "ANY")}}
+    %\item{[}{\code{signature(x = "KT.output", i = "ANY", j = "ANY", drop = "ANY")}}
+    \item{[<-}{\code{signature(x = "KT.output")}: Change one of the slots.}
+    \item{[}{\code{signature(x = "KT.output")}: Extract one of the slots.}
+    \item{names}{\code{signature(x = "KT.output")}: Prints slot names.}
+    \item{show}{\code{signature(object = "KT.output")}: Prints all slots of
+  the KDD object.}
+    \item{summary}{\code{signature(object = "KT.output")}: Prints summary
+  characteristics of the KDD object.}
+    \item{plot}{\code{signature(x = "KT.output")}: Graphically displays contents of the object.}
 	 }
 }
 \references{

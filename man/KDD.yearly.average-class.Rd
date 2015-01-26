@@ -6,7 +6,8 @@
 \alias{KDD.yearly.average class}
 \alias{KDD.yearly.average object}
 \alias{KDD.yearly.average-object}
-\alias{[,KDD.yearly.average,ANY,ANY,ANY-method}
+%\alias{[,KDD.yearly.average,ANY,ANY,ANY-method}
+\alias{[,KDD.yearly.average-method}
 \alias{show,KDD.yearly.average-method}
 \alias{summary,KDD.yearly.average-method}
 \alias{names,KDD.yearly.average-method}
@@ -28,10 +29,10 @@ Objects can be created by calls of the form \code{new("KDD.yearly.average", ...)
 }
 \section{Methods}{
   \describe{
-    \item{[}{\code{signature(x = "KDD.yearly.average", i = "ANY", j = "ANY", drop = "ANY")} }
-    \item{names}{\code{signature(x = "KDD.yearly.average")} }
-    \item{show}{\code{signature(object = "KDD.yearly.average")} }
-    \item{summary}{\code{signature(object = "KDD.yearly.average")} }
+    \item{[}{\code{signature(x = "KDD.yearly.average")}: Extract one of the slots.}
+    \item{names}{\code{signature(x = "KDD.yearly.average")}: Prints slot names.}
+    \item{show}{\code{signature(object = "KDD.yearly.average")}: Prints all slots of the KDD object.}
+    \item{summary}{\code{signature(object = "KDD.yearly.average")}: Prints summary characteristics of the KDD object.}
 	 }
 }
 \references{

@@ -1,23 +1,25 @@
 \name{KDD-class}
-\Rdversion{1.2}
+\Rdversion{1.3}
 \docType{class}
 \alias{KDD-class}
 \alias{KDD}
 \alias{KDD object}
 \alias{KDD-object}
 \alias{KDD class}
-\alias{[<-,KDD,ANY,ANY,ANY-method}
-\alias{[,KDD,ANY,ANY,ANY-method}
+%\alias{[<-,KDD,ANY,ANY,ANY-method}
+\alias{[<-,KDD-method}
+%\alias{[,KDD,ANY,ANY,ANY-method}
+\alias{[,KDD-method}
+\alias{names,KDD-method}
 \alias{show,KDD-method}
 \alias{summary,KDD-method}
-\alias{names,KDD-method}
 
 \title{Class \code{"KDD"}}
 \description{
 Class KDD (Key Day Dataset) used as argument in \code{FeedbackTS} functions for the analysis of fragmented time directionality and feedback.
 }
 \section{Objects from the Class}{
-Objects can be created by calls of the form \code{new("KDD", ...)}, \link{kdd.from.raw.data}(...) and \link{kdd}(...).
+Objects can be created by calls of the form \code{new("KDD", ...)}, \link{kdd.from.raw.data}(...) and \link{kdd}(...). 
 }
 \section{Slots}{
   \describe{
@@ -29,17 +31,19 @@ Objects can be created by calls of the form \code{new("KDD", ...)}, \link{kdd.fr
     \item{\code{keyday.threshold}:}{Object of class \code{"numeric"} providing the threshold value above which a day is considered as a key day (i.e. if \eqn{y_i\ge } \code{keyday.threshold}, then day \eqn{i} is a key day).}
   }
 }
-
-
 \section{Methods}{
   \describe{
-    \item{[<-}{\code{signature(object = "KDD", i = "ANY", j = "ANY", value = "ANY")} }
-    \item{[}{\code{signature(x = "KDD", i = "ANY", j = "ANY", drop = "ANY")} }
+    \item{[<-}{\code{signature(x = "KDD")}: Change one of the slots.}
+%    \item{[<-}{\code{signature(x = "KDD", i = "ANY", j = "ANY", value =
+%	"ANY")}: Change one of the slots.}
+    \item{[}{\code{signature(x = "KDD")}: Extract one of the slots.}
+%    \item{[}{\code{signature(x = "KDD", i = "ANY", j = "ANY", drop =
+%	"ANY")}: Extract one of the slots.}
+    \item{names}{\code{signature(x = "KDD")}: Prints slot names. }
     \item{show}{\code{signature(object = "KDD")}: Prints all slots of
   the KDD object.}
     \item{summary}{\code{signature(object = "KDD")}: Prints summary
   characteristics of the KDD object.}
-    \item{names}{\code{signature(x = "KDD")}: Prints slot names.}
 	 }
 }
 \references{
@@ -48,7 +52,6 @@ Soubeyrand, S., Morris, C. E. and Bigg, E. K. (2014). Analysis of fragmented tim
 \author{
 Samuel Soubeyrand \email{Samuel.Soubeyrand@avignon.inra.fr}, Cindy E. Morris, E. Keith Bigg.
 }
-
 
 
 \seealso{
@@ -76,7 +79,7 @@ KDD["before.after"][,1:5]
 KDD["date"]
 KDD["keyday.threshold"]
 
-# change keyday threshold
+## change keyday threshold
 KDD["keyday.threshold"]=50
 }
 \keyword{classes}
