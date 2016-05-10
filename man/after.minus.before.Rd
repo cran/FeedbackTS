@@ -15,7 +15,7 @@
 	either a \link{KDD object}, a \link{KDD.yearly.average object}, or a matrix with an odd number of rows corresponding built as the \code{before.after} slot of a \link{KDD object} or a \link{KDD.yearly.average object}. 
 }
   \item{operator}{
-	a character string specifying the transformation of the raw values, must be one of \code{"dmv"} or \code{"dmpiv"}.
+	a character string specifying the transformation of the raw values, must be one of \code{"dmv"}, \code{"dmpiv"} or \code{"dmgiv"}.
 }
 }
 \details{
@@ -30,6 +30,13 @@
 		D_i=\left(\frac{1}{K}\sum_{k=1}^K 1(y_{i+k}>0)\right) - \left(\frac{1}{K}\sum_{k=1}^K  1(y_{i-k}>0)\right)=\frac{1}{K}\sum_{k=1}^K \{1(y_{i+k}>0)-1(y_{i-k}>0)\},
 	}
 	where \eqn{1(\cdot)} is the indicator function.
+
+	If \code{operator = "dmgiv"} (difference of means of greater indicator values), the raw values \eqn{y_{i-K},\ldots,y_{i+K}} are used to compute the difference: 
+	\deqn{
+		D_i=\left(\frac{1}{K}\sum_{k=1}^K
+	1(y_{i+k}>y_{i-k})\right) - \left(\frac{1}{K}\sum_{k=1}^K
+	1(y_{i-k}>y_{i+k})\right).
+      }
 }
 \value{
 A numeric vector providing for each key day the value of the after-before difference.

@@ -7,7 +7,8 @@ Computation of feedback and change-in-feedback statistics
 Computation of temporal averages of after-before differences around key days calculated from a time series and computation of the difference in the temporal averages around a turning point in time.
 }
 \usage{
-feedback.stats(object, operator, turning.year = NULL)
+feedback.stats(object, operator, turning.year = NULL,
+    trend.correction = list( apply = FALSE , object2 = NULL ))
 }
 
 \arguments{
@@ -15,10 +16,17 @@ feedback.stats(object, operator, turning.year = NULL)
 either a \link{KDD object} or a \link{KDD.yearly.average object}.
 }
   \item{operator}{
-a character string specifying the transformation of the raw values, must be one of \code{"dmv"} or \code{"dmpiv"}.
+a character string specifying the transformation of the raw values, must be one of \code{"dmv"}, \code{"dmpiv"} or \code{"dmgiv"}.
 }
   \item{turning.year}{
 an optional numeric vector of years used to specify turning points in the data series.
+}
+  \item{trend.correction}{
+an optional list of two items: the \code{apply} item, which is a logical
+  indicating whether the trend correction should be applied or not
+  (default to \code{FALSE}); the \code{object2} item, which is a
+  \link{KDD object} typically built like \code{object} except that the
+  keyday threshold is fixed at zero (see example section below).
 }
 }
 \details{
@@ -37,10 +45,29 @@ If \code{operator = "dmpiv"} (difference of means of positive indicator values),
 		D_i=\left(\frac{1}{K}\sum_{k=1}^K 1(y_{i+k}>0)\right) - \left(\frac{1}{K}\sum_{k=1}^K  1(y_{i-k}>0)\right)=\frac{1}{K}\sum_{k=1}^K \{1(y_{i+k}>0)-1(y_{i-k}>0)\},
 	}
 	where \eqn{1(\cdot)} is the indicator function.
-	
-If \code{turning.year = NULL}, the function computes \eqn{\bar D(I)} where \eqn{I} is the set of all key days in the whole time series.   
 
-If \code{turning.year} is a numeric vector, for each value \eqn{t} in \code{turning.year} the function computes \eqn{\bar D(I)} with \eqn{I} equal to the set of key days in the whole time series, in the time series before \eqn{t} and in the time series after \eqn{t}. The function also computes, for each value \eqn{t}, the difference between the temporal averages of after-before differences after \eqn{t} and before \eqn{t}.  
+If \code{operator = "dmgiv"} (difference of means of greater indicator values), the raw values \eqn{y_{i-K},\ldots,y_{i+K}} are used to compute the difference: 
+	\deqn{
+		D_i=\left(\frac{1}{K}\sum_{k=1}^K
+	1(y_{i+k}>y_{i-k})\right) - \left(\frac{1}{K}\sum_{k=1}^K
+	1(y_{i-k}>y_{i+k})\right).
+      }
+	
+If \code{turning.year = NULL}, the function computes \eqn{\bar D(I)}
+where \eqn{I} is the set of all key days in the whole time series.
+
+If \code{turning.year} is a numeric vector, for each value \eqn{t} in
+\code{turning.year} the function computes \eqn{\bar D(I)} with \eqn{I}
+equal to the set of key days in the whole time series, in the time
+series before \eqn{t} and in the time series after \eqn{t}. The function
+also computes, for each value \eqn{t}, the difference between the
+temporal averages of after-before differences after \eqn{t} and before
+\eqn{t}.
+
+If \code{trend.correction$apply = TRUE}, a trend correction is applied
+to take into account, for example, seasonal effect in the time series
+(see Morris et al., 2016). 
+
 }
 \value{
 If \code{turning.year = NULL}, a numeric equal to the temporal average of after-before differences around key days calculated from the whole time series.
@@ -60,6 +87,11 @@ If \code{turning.year} is a numeric vector, a numeric vector providing:
 }
 }
 \references{
+Morris, C.E., Soubeyrand, S.; Bigg, E.K., Creamean, J.M., Sands,
+		D.C. (2016). Rainfall feedback maps: a tool to depict
+		the geography of precipitation's sensitivity to
+		aerosols. INRA Research Report.
+  
 Soubeyrand, S., Morris, C. E. and Bigg, E. K. (2014). Analysis of fragmented time directionality in time series to elucidate feedbacks in climate data. Environmental Modelling and Software 61: 78-86.
 }
 \author{
@@ -83,5 +115,13 @@ feedback.stats(KDD, "dmv")
 
 #### main and auxiliary feedback statistics
 feedback.stats(KDD, "dmv", turning.year=c(1960,1980))
+
+#### apply a trend correction
+## define the KDD object used for trend correction (it is defined as
+## KDD above except that the threshold value is equal to 0)
+KDD2=kdd.from.raw.data(raw.data=rain.site.6008, keyday.threshold=0, nb.days=20,
+   col.series=5, col.date=c(2,3,4), na.rm=TRUE, filter=NULL)
+## compute the statistic
+feedback.stats(KDD, "dmv", trend.correction=list(apply=TRUE, object2=KDD2))
 }
 \keyword{ misc }

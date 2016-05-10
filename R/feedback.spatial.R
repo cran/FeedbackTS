@@ -27,29 +27,29 @@ map.statistic=function(coordinates,statistic,region,cex.circles=c(3,0.2),legend,
 
 
 .map.shape=function(nodes,region,plots){
-  	MAP=map('worldHires', region$border,xlim=region$xlim,ylim=region$ylim,col="grey",
-    fill=TRUE,plot=plots)
-  	k=length(MAP)+1
-  	j1=1
-  	j=1
-  	for(i in 1:length(MAP$x)){
+    MAP=map('worldHires', region$border,xlim=region$xlim,ylim=region$ylim,col="grey",
+        fill=TRUE,plot=plots)
+    k=length(MAP)+1
+    j1=1
+    j=1
+    for(i in 1:length(MAP$x)){
     	if(is.na(MAP$x[j])){
-      		if(j-1-j1>5){
+            if(j-1-j1>5){
                 MAP[[k]]=cbind(MAP$x[j1:(j-1)],MAP$y[j1:(j-1)])
                 k=k+1
             }
             j1=j+1
     	}
     	j=j+1
-  	}
-  	in.region=0
-  	for(i in 5:length(MAP)){
+    }
+    in.region=0
+    for(i in 5:length(MAP)){
     	in.region=in.region+point.in.polygon(nodes[,1],nodes[,2],MAP[[i]][,1],MAP[[i]][,2])
-  	}
-  	if(plots){
-  		points(nodes[in.region>0,],pch=".",col=3)
-  	}
-  	list(MAP=MAP,in.region=(in.region>0))
+    }
+    if(plots){
+        points(nodes[in.region>0,],pch=".",col=3)
+    }
+    list(MAP=MAP,in.region=(in.region>0))
 }
 
 

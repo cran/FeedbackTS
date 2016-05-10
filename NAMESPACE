@@ -11,9 +11,16 @@ exportClasses(
     "KDD.yearly.average",
     "KT.output"
 )
+importFrom("grDevices", "gray")
+importFrom("graphics", "abline", "axis", "box", "boxplot", "contour",
+           "hist", "image", "lines", "mtext", "points", "polygon",
+           "text")
+importFrom("stats", "dist", "quantile", "rbinom", "sd")
+
+
 import("methods")
 import("maps")
 import("mapdata")
 import("proj4")
-import("geoR")
 import("sp")
+import("geoR")

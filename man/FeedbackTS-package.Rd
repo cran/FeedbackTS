@@ -12,10 +12,10 @@ Analysis of fragmented time directionality to investigate feedbacks in time seri
 \tabular{ll}{
 Package: \tab FeedbackTS\cr
 Type: \tab Package\cr
-Version: \tab 1.3.1\cr
-Date: \tab 2015-01-26\cr
+Version: \tab 1.4\cr
+Date: \tab 2016-05-06\cr
 License: \tab GPL (>=2.0)\cr
-Depends: \tab methods, maps, mapdata, proj4, geoR, sp\cr
+Depends: \tab methods, maps, mapdata, proj4, geoR, sp, date\cr
 }
 To analyze feedback in a single time series create a \link{KDD object} (Key Day Dataset) with the construction function \link{kdd.from.raw.data} and test fragmented time directionality with the function \link{feedback.test}. 
  
