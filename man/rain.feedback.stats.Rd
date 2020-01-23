@@ -42,7 +42,7 @@ stat1=rain.feedback.stats[["Feedback.whole.period"]]
 
 #### map of feedback index 
 map.statistic(coord,stat1,cex.circles=c(3,0.2),
-   region=list(border='Australia',xlim=c(110,155)),
+   region=list(border="Australia",xlim=c(110,155)),
    legend=list(x=c(rep(114,3),rep(123,2)),y=-c(37,39.5,42,37,39.5),
       xtext=c(rep(114,3),rep(123,2))+1,ytext=-c(37,39.5,42,37,39.5),digits=2),
    main="Feedback")

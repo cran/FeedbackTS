@@ -108,5 +108,3 @@ setMethod(f="plot",signature="KT.output",definition=.KT.output.plot)
 
 
 
-
-

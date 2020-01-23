@@ -6,14 +6,14 @@
 \alias{KT.output class}
 \alias{KT.output-object}
 \alias{KT.output object}
-%\alias{[<-,KT.output,ANY,ANY,ANY-method}
+\alias{[<-,KT.output,ANY,ANY,ANY-method}
+%\alias{[<-,KT.output-method}
 %\alias{[,KT.output,ANY,ANY,ANY-method}
-\alias{[<-,KT.output-method}
 \alias{[,KT.output-method}
 \alias{show,KT.output-method}
 \alias{summary,KT.output-method}
 \alias{names,KT.output-method}
-\alias{plot,KT.output-method}
+\alias{plot,KT.output,ANY-method}
 
 \title{Class \code{"KT.output"}}
 \description{
@@ -34,16 +34,16 @@ Objects are created by calls of the \link{krige.test} function.
 }
 \section{Methods}{
   \describe{
-    %\item{[<-}{\code{signature(x = "KT.output", i = "ANY", j = "ANY", value = "ANY")}}
+    \item{[<-}{\code{signature(x = "KT.output", i = "ANY", j = "ANY", value = "ANY")}}
+    %\item{[<-}{\code{signature(x = "KT.output")}: Change one of the slots.}
     %\item{[}{\code{signature(x = "KT.output", i = "ANY", j = "ANY", drop = "ANY")}}
-    \item{[<-}{\code{signature(x = "KT.output")}: Change one of the slots.}
     \item{[}{\code{signature(x = "KT.output")}: Extract one of the slots.}
     \item{names}{\code{signature(x = "KT.output")}: Prints slot names.}
     \item{show}{\code{signature(object = "KT.output")}: Prints all slots of
   the KDD object.}
     \item{summary}{\code{signature(object = "KT.output")}: Prints summary
   characteristics of the KDD object.}
-    \item{plot}{\code{signature(x = "KT.output")}: Graphically displays contents of the object.}
+    \item{plot}{\code{signature(x = "KT.output"), i="ANY"}: Graphically displays contents of the object.}
 	 }
 }
 \references{
@@ -66,13 +66,12 @@ stat1=rain.feedback.stats[["Feedback.whole.period"]]
 
 #### variogram analysis and kriging of feedback index
 \dontrun{
-par(mfrow=c(2,3), mar=c(5.1,4.1,4.1,2.1))
-kr1=krige(coordinates=coord,statistic=stat1,
-   grid=list(x=seq(110,155,0.25),y=seq(-45,-11,0.25),border="Australia",
-      proj="+proj=lcc +lat_1=-18 +lat_2=-36 +lat0=-25 +lon_0=140",degrees=TRUE),
-   variog.param=list(keep.distance=2/3,nb.bin=15,cov.pars=c(0.0008,10^6),
-      nugget=0.0001,fix.nugget=FALSE,coordinates.scaling=10^5,statistic.scaling=0.01),
-   krige.param=list(type.krige="ok",trend.d="1st"),plots=TRUE) }
+par(mfrow=c(2,2), mar=c(5.1,4.1,4.1,2.1))
+kr1=krige(coordinates=coord, statistic=stat1,
+    grid=list(x=seq(110,155,0.25),y=seq(-45,-11,0.25),border="Australia",
+        proj="+proj=lcc +lat_1=-18 +lat_2=-36 +lat0=-25 +lon_0=140",degrees=TRUE),
+    plots=TRUE)
+}
 
 #### test spatial variation in feedback index and plot test output
 ## computer intensive stage

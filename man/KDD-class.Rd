@@ -6,8 +6,8 @@
 \alias{KDD object}
 \alias{KDD-object}
 \alias{KDD class}
-%\alias{[<-,KDD,ANY,ANY,ANY-method}
-\alias{[<-,KDD-method}
+\alias{[<-,KDD,ANY,ANY,ANY-method}
+%\alias{[<-,KDD-method}
 %\alias{[,KDD,ANY,ANY,ANY-method}
 \alias{[,KDD-method}
 \alias{names,KDD-method}
@@ -33,9 +33,9 @@ Objects can be created by calls of the form \code{new("KDD", ...)}, \link{kdd.fr
 }
 \section{Methods}{
   \describe{
-    \item{[<-}{\code{signature(x = "KDD")}: Change one of the slots.}
-%    \item{[<-}{\code{signature(x = "KDD", i = "ANY", j = "ANY", value =
-%	"ANY")}: Change one of the slots.}
+ %   \item{[<-}{\code{signature(x = "KDD")}: Change one of the slots.}
+    \item{[<-}{\code{signature(x = "KDD", i = "ANY", j = "ANY", value =
+	"ANY")}: Change one of the slots.}
     \item{[}{\code{signature(x = "KDD")}: Extract one of the slots.}
 %    \item{[}{\code{signature(x = "KDD", i = "ANY", j = "ANY", drop =
 %	"ANY")}: Extract one of the slots.}

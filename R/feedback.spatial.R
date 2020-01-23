@@ -53,90 +53,95 @@ map.statistic=function(coordinates,statistic,region,cex.circles=c(3,0.2),legend,
 }
 
 
-krige=function(coordinates,statistic,variog.param,grid,krige.param,plots=TRUE){
-    input=list(coordinates=coordinates,statistic=statistic,
-        variog.param=variog.param,grid=grid,krige.param=krige.param)
-	## projection and scaling of coordinates and statistic
-	if(length(grid$proj)>0){
-		coord.proj=project(coordinates,proj=grid$proj,degrees=grid$degrees)
-		coord.proj=cbind(coord.proj$x,coord.proj$y)
-	} else {
-		coord.proj=coordinates
-	}
-	coord.scaling=variog.param$coordinates.scaling
-	stat.scaling=variog.param$statistic.scaling
-	coord.proj=coord.proj/coord.scaling
-	statistic=statistic/stat.scaling
-	variog.param$cov.pars=variog.param$cov.pars/c(stat.scaling^2,coord.scaling)
-	variog.param$nugget=variog.param$nugget/stat.scaling^2
-	## variogram fitting
-  	aa=as.geodata(cbind(coord.proj,statistic),coords.col=1:2,data.col=3)
-  	maxdist=max(dist(aa$coord))*variog.param$keep.distance
-  	cloud1=variog(aa, option = "cloud")
-  	bin1=variog(aa,uvec=seq(0,maxdist,l=variog.param$nb.bin),bin.cloud = T)
-  	ols.n=variofit(bin1, ini.cov.pars=c(variog.param$cov.pars[1],variog.param$cov.pars[2]),
-    	nugget = variog.param$nugget,fix.nugget=variog.param$fix.nugget,
-    	weights = "equal")
-  	wls.n=variofit(bin1, ini.cov.pars=ols.n$cov.pars,nugget=ols.n$nugget,
-    	fix.nugget=variog.param$fix.nugget)
-	if(plots){	
-		xlab="distance"
-		ylab="semivariance"
-		if(length(grid$proj)>0){
-			xlab=paste(xlab,"in projection space")
-		}
-		if(coord.scaling!=1){
-			xlab=paste("scaled",xlab)
-		}
-		if(stat.scaling!=1){
-			ylab=paste("scaled",ylab)
-		}
-		plot(bin1,xlab=xlab,ylab=ylab)
-  		lines(wls.n, lty = 1, lwd = 2, max.dist = maxdist)
-  		## variogram envelopes (under randomness and under the model)
-  		env.mc <- variog.mc.env(aa, obj.variog = bin1)
-  		env.model <- variog.model.env(aa, obj.variog = bin1,model.pars = wls.n)
-  		plot(bin1, envelope = env.mc,xlab=xlab,ylab=ylab)
-  		plot(bin1, envelope = env.model,xlab=xlab,ylab=ylab)
-  	}
-  	## grid shaping
-  	gr=expand.grid(grid$x,grid$y)
-	gr1=.map.shape(gr,list(border=grid$border,xlim=range(grid$x),ylim=range(grid$y)),
-    plots=FALSE)
-	MAP=gr1$MAP
-	in.region=gr1$in.region
-  	## kriging
-	if(length(grid$proj)>0){
-  		pred.grid=project(gr,proj=grid$proj,degrees=grid$degrees)
-  		pred.grid=cbind(pred.grid$x,pred.grid$y)
-  	} else {
-  		pred.grid=gr
-  	}
-  	scaled.pred.grid=pred.grid/coord.scaling
-  	kc=krige.conv(geodata=aa,locations=scaled.pred.grid,
-  		krige=krige.control(obj.model=wls.n,type.krige=krige.param$type.krige,
-  			trend.d=krige.param$trend.d))
-  	kc$predict=kc$predict*stat.scaling
-  	kc$krige.var=kc$krige.var*stat.scaling^2
-  	kc$predict[!in.region]=NA
-	kc$krige.var[!in.region]=NA
-	if(plots){
-		boxplot(cbind(kc$predict,sqrt(kc$krige.var)),axes=FALSE,ylab="statistic")
-		box()
-		axis(1,1:2,labels=c("prediction","sd"))
-		axis(2)
-		image(kc,loc=gr,col=gray(seq(1,0.1,l=100)),xlab="latitude",ylab="longitude",
-        main="kriging prediction")
-		contour(kc,loc=gr,add=TRUE)
-		map('worldHires', grid$border,xlim=range(grid$x),ylim=range(grid$y),col=1,add=TRUE)	
-		image(kc,val=sqrt(kc$krige.var),loc=gr,col=gray(seq(1,0.1,l=100)),
-        xlab="latitude",ylab="longitude",main="kriging standard error")
-		contour(kc,val=sqrt(kc$krige.var),loc=gr,add=TRUE)
-		map('worldHires', grid$border,xlim=range(grid$x),ylim=range(grid$y),col=1,add=TRUE)	
-	}
-  	list(input=input,in.region=in.region,variofit.wls=wls.n,MAP=MAP,grid=gr,
-    krige=kc)
+krige=function(coordinates,statistic,grid,krige.param=NULL,plots=TRUE,
+    variog.param=list(npoints=50,nsim=99,plot.numbers=0.04)){
+    statistic=as.vector(statistic)
+    input=list(coordinates=coordinates,statistic=statistic,variog.param=variog.param,grid=grid,krige.param=krige.param)
+    ## eventual projection to be made
+    if(length(grid$proj)>0){
+        coord.proj=project(coordinates,proj=grid$proj,degrees=grid$degrees)
+        coord.proj=cbind(coord.proj$x,coord.proj$y)
+    } else {
+        coord.proj=coordinates
+    }
+    rownames(coord.proj)=NULL
+    ## variography and kriging
+    colnames(coord.proj)=c("x","y")
+    DATA=SpatialPointsDataFrame(coord.proj,as.data.frame(cbind(statistic,coord.proj)))
+    gr=expand.grid(grid$x,grid$y)
+    gr1=.map.shape(gr,list(border=grid$border,xlim=range(grid$x),ylim=range(grid$y)),
+        plots=FALSE)
+    MAP=gr1$MAP
+    in.region=gr1$in.region
+    if(length(grid$proj)>0){
+        pred.grid=project(gr,proj=grid$proj,degrees=grid$degrees)
+        pred.grid=cbind(pred.grid$x,pred.grid$y)
+    } else {
+        pred.grid=gr
+    }
+    pred.grid=pred.grid[in.region,]
+    colnames(pred.grid)=c("x","y")
+    rownames(pred.grid)=NULL
+    pred.grid1=SpatialPointsDataFrame(pred.grid,as.data.frame(cbind(pred.grid)))
+    formula0=as.formula("statistic~1")
+    if(length(krige.param)>0){
+        formula0=as.formula(paste("statistic~",paste(krige.param,collapse="+")))
+    }
+    kk=autoKrige(formula0,input_data=DATA,new_data=pred.grid1)
+    if(plots){
+        ## variogram plotting
+        if(is.null(variog.param$npoints)){ variog.param$npoints=50 }
+        if(is.null(variog.param$nsim)){ variog.param$nsim=99 }
+        if(is.null(variog.param$plot.numbers)){ variog.param$plot.numbers=0.04 }
+        npoints=variog.param$npoints ## default is 50
+        vgmfit=variogramLine(kk$var_model,maxdist=max(kk$exp_var$dist),n=npoints)
+        nsim=variog.param$nsim  ## default is 99
+        vgmfitStar=matrix(0,nsim,npoints)
+        for(i in 1:nsim){
+            permut=sample(1:length(statistic),size=length(statistic),replace=FALSE)
+            coord.permut=coord.proj[permut,]
+            rownames(coord.permut)=NULL
+            DATAStar=SpatialPointsDataFrame(coord.permut,as.data.frame(cbind(statistic,coord.permut)))
+            variogramStar = autofitVariogram(formula0,input_data=DATAStar)
+            vgmfitStar[i,]=variogramLine(variogramStar$var_model,maxdist=max(variogramStar$exp_var$dist),n=npoints)[,2]
+        }
+        vgmfitStar=apply(vgmfitStar,2,range)
+        plot.numbers=variog.param$plot.numbers ## default is 0.04
+        plot(vgmfit,type="l",ylab="semi-variance",xlab="distance",xlim=c(0,1.1*max(variogramStar$exp_var$dist)),
+             ylim=range(c(vgmfit[,2],kk$exp_var[,3],vgmfitStar)))
+        points(kk$exp_var[,2:3])
+        if(plot.numbers>0){
+            text(kk$exp_var[,2]+plot.numbers*max(kk$exp_var[,2]),kk$exp_var[,3],kk$exp_var$np)
+        }
+        lines(vgmfit[,1],vgmfitStar[1,],lty="dashed")
+        lines(vgmfit[,1],vgmfitStar[2,],lty="dashed")
+        ## boxplots of kriging prediction and kriging standard deviation
+        boxplot(cbind(kk$krige_output$var1.pred,kk$krige_output$var1.stdev),axes=FALSE,ylab="statistic")
+        box()
+        axis(1,1:2,labels=c("prediction","sd"))
+        axis(2)
+        ## kriging prediction plotting 
+        prediction=rep(NA,nrow(gr))
+        prediction[in.region]=kk$krige_output$var1.pred
+        prediction=matrix(prediction,length(grid$x),length(grid$y))
+        image(grid$x,grid$y,prediction,col=gray(seq(1,0.1,l=100)),xlab="latitude",ylab="longitude",
+              main="kriging prediction")
+        contour(grid$x,grid$y,prediction,add=TRUE)
+        map('worldHires', grid$border,xlim=range(grid$x),ylim=range(grid$y),col=1,add=TRUE)
+        ## kriging standard deviation plotting
+        predictionSD=rep(NA,nrow(gr))
+        predictionSD[in.region]=kk$krige_output$var1.stdev
+        predictionSD=matrix(predictionSD,length(grid$x),length(grid$y))	
+        image(grid$x,grid$y,predictionSD,col=gray(seq(1,0.1,l=100)),xlab="latitude",ylab="longitude",
+              main="kriging standard error")
+        contour(grid$x,grid$y,predictionSD,add=TRUE)
+        map('worldHires', grid$border,xlim=range(grid$x),ylim=range(grid$y),col=1,add=TRUE)
+    }    
+    return(list(input=input,in.region=in.region,MAP=MAP,grid=gr,krige=kk))
 }
+
+
+
 
 krige.test=function(krige.output, subregion, alternative, nb.rand, subregion.coverage=0.8){
 	## permute and krige
@@ -144,15 +149,17 @@ krige.test=function(krige.output, subregion, alternative, nb.rand, subregion.cov
 	in.region=krige.output$in.region
 	grid=krige.output$grid
 	in.subregion=(point.in.polygon(grid[,1],grid[,2],subregion$x,subregion$y)>0)
+        predict=rep(NA,length(in.region))
+        predict[in.region]=krige.output$krige$krige_output$var1.pred
 	predict.permute=NULL
 	j=0
 	k=0
 	while(j < nb.rand){
 		k=k+1
-		translation.index=sample(1:(length(krige.output$krige$predict)-1),1)
-		permutation=c((translation.index+1):length(krige.output$krige$predict),
+		translation.index=sample(1:(length(predict)-1),1)
+		permutation=c((translation.index+1):length(predict),
 			1:translation.index)
-		predict.permute.try=krige.output$krige$predict[permutation]
+		predict.permute.try=predict[permutation]
 		if(mean(!is.na(predict.permute.try[in.region & in.subregion]))>subregion.coverage){
 			predict.permute=cbind(predict.permute,predict.permute.try)
 			j=j+1
@@ -163,8 +170,9 @@ krige.test=function(krige.output, subregion, alternative, nb.rand, subregion.cov
 	}
 	print(paste("Total number of permutations:",k,"(",k-nb.rand,"permutations led to under-coverage of the subregion under study and were discarded )"))
 	## plot
+      #  browser()
 	count.local.nodes=sum(in.region & in.subregion)
-	localpred=mean(krige.output$krige$predict[in.region & in.subregion])
+	localpred=mean(predict[in.region & in.subregion])
 	localPRED=as.numeric(colMeans(predict.permute[in.region & in.subregion,],
 		na.rm=TRUE))
 	if(alternative=="greater"){
@@ -181,9 +189,5 @@ krige.test=function(krige.output, subregion, alternative, nb.rand, subregion.cov
         averageKrigingPrediction.obs=localpred,
         alternative=alternative, p.value=pval))
 }
-
-
-
-
 
 

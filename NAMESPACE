@@ -4,7 +4,8 @@ exportMethods(
     "[<-",
     "show",
     "summary",
-    "names"
+    "names",
+    "plot"
 )
 exportClasses(
     "KDD",
@@ -15,12 +16,12 @@ importFrom("grDevices", "gray")
 importFrom("graphics", "abline", "axis", "box", "boxplot", "contour",
            "hist", "image", "lines", "mtext", "points", "polygon",
            "text")
-importFrom("stats", "dist", "quantile", "rbinom", "sd")
-
+importFrom("stats", "dist", "quantile", "rbinom", "sd", "as.formula")
 
 import("methods")
 import("maps")
 import("mapdata")
 import("proj4")
 import("sp")
-import("geoR")
+import("gstat")
+import("automap")
